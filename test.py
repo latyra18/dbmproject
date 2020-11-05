@@ -11,7 +11,6 @@ config = {
   'password': 'april2000',
   'host': 'localhost',
   'database' : 'panthergrill',
-  'raise_on_warning': True,
 }
 link = mysql.connector.connect(**config)
 
