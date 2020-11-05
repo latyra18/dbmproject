@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-    
+
+
 <!-- This is the css template I found to help format the form-->
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,30 +55,27 @@ a {
 }
 </style>
 </head>
-<body>
+<body>    
 
+    <!-- This is the start of the form fields for the sign in form-->
+    <form action="data.php">
+        <div class="sform">
+            <h1>Sign in</h1>
+            <p>Sign in to your account</p>
+            <hr>
+            <label for="uname"><b>Username</b></label>            
+            <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
 
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
-<!-- This is the start of the form fields for the sign in form--> 
-<form action="data.php">
-  <div class="sform">
-    <h1>Sign in</h1>
-    <p>Sign in to your account</p>
-    <hr>
+            <button type="submit" class="subbtn"> Sign In</button>
+        </div>
 
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-    <button type="submit" class="subbtn"> Sign In</button>
-  </div>
-  
-  <div class="noaccount">
-    <p>  Don't have an account? <a href="regform.html">Register Now!</a></p>
-  </div>
-</form>
+        <div class="noaccount">
+            <p>  Don't have an account? <a href="regform.html">Register Now!</a></p>
+        </div>
+    </form>
 
 </body>
 </html>
