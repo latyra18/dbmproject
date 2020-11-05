@@ -6,13 +6,13 @@
 
 import mysql.connector
 
-config = {
-  'user': 'root',
-  'password': 'april2000',
-  'host': 'localhost',
-  'database' : 'panthergrill',
-}
-link = mysql.connector.connect(**config)
+import mysql.connector
+
+cnx = mysql.connector.connect(user='root', password='april2000',
+                              host='localhost',
+                              database='panthergrill')
+cnx.close()
+
 
 
 f = open('pgrillhome.html','wb')
