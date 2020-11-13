@@ -1,23 +1,4 @@
-#print ("Hello World")
-
-#write-html
-
-#connect db
-
-import mysql.connector
-
-import mysql.connector
-
-cnx = mysql.connector.connect(user='root', password='april2000',
-                              host='localhost',
-                              database='panthergrill')
-cnx.close()
-
-
-
-f = open('pgrillhome.html','wb')
-
-message = """<html>
+<html>
 
 <!-- This is the css template I found to help format the form-->
 <head>
@@ -95,9 +76,4 @@ a {
     </form>
 
 </body>
-</html>"""
-
-
-#write message
-f.write(message)
-f.close()
+</html>
