@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 @app.route("/")
-def main():
+def home():
     return render_template("pgrillhome.html")
 
 @app.route("/regform.html")
