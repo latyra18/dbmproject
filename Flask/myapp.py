@@ -15,12 +15,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = conn
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
 '''
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db_session.remove()
-
 '''
+
 
 @app.route("/")
 def home():
