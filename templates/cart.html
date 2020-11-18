@@ -1,0 +1,24 @@
+    <!DOCTYPE html>
+<html>
+<head>
+<script>
+     var clicks = 0;
+    function myFunction() {
+
+        clicks += 1;
+        document.getElementById("demo").innerHTML = clicks;
+
+
+    }
+</script>
+</head>
+<body>
+
+<p>Click the button to trigger a function.</p>
+
+<button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+</body>
+</html>
