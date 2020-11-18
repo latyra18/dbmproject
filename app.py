@@ -46,6 +46,8 @@ def register():
         return render_template("regform.html")
     if request.method == 'POST':
         # add user to db
+        database.new_user(request.form['fname'], request.form['lname'], request.form['uname'],
+                          request.form['psw'], request.form['pn'])
         return render_template("landpage.html")
 
 
@@ -70,11 +72,10 @@ def location():
     return render_template("location.html")
 
 
-'''
-@app.route("/.html")
+@app.route("/profile.html")
 def logout():
-    return render_template("menu.html")
-'''
+    return render_template("profile.html", user=session['user'])
+
 
 if __name__ == '__main__':
     database.init_db()

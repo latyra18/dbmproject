@@ -18,7 +18,8 @@ class Users(Base):
     phonenumber = Column(String(45), nullable=False)
 
     def __repr__(self):
-        return self.fullName
+        return {'name': self.fullName, 'username': self.username, 'password': self.password,
+                'phonenumber': self.phonenumber}
 
 
 # Table employee

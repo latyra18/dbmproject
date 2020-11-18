@@ -56,4 +56,12 @@ def fullname_fromuser(username_given):
     return fullname
 
 
-print(fullname_fromuser('spaty4'))
+# insert new user
+'''
+def new_user(firstname, lastname, username, password, phonenumber):
+    user = Users(firstName=firstname, lastName=lastname, username=username, password=password, phonenumber=phonenumber)
+    trans = conn.begin()
+    conn.execute(db.insert[user].into(Users))
+    trans.commit()
+    conn.close()
+'''
