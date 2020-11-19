@@ -36,6 +36,8 @@ class Employee(Base):
     wage = Column(Float, nullable=False)
     phoneNumber = Column(String(45), nullable=False)
     endDate = Column(Date, nullable=True)
+    username = Column(String(45), default=fullName)
+    password = Column(String(45), default=phoneNumber)
 
     def __repr__(self):
         return self.fullName
@@ -97,7 +99,7 @@ class Order(Base):
     total = Column(Integer, nullable=False)
 
     def __repr__(self):
-        return self.idOrder, self.idUser
+        return {'order id': self.idOrder, 'date': self.time, 'total': self.total}
 
 
 # Table schedule

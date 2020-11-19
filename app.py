@@ -20,8 +20,17 @@ def home():
     if not session.get('logged_in'):
         return render_template("home.html")
     else:
+        if session.get('employee'):
+            return redirect(url_for('employee'))
         return redirect(url_for('landpage'))
-        # return render_template("landpage.html")
+
+
+@app.route('/employee.htm')
+def employee():
+    start = database.startdate_employee(session['user'])
+    position = database.position_employee(session['user'])
+    wage = database.wage_employee(session['user'])
+    return render_template("employee.html", user=session['user'], start=start, position=position, wage=wage)
 
 
 @app.route('/login.html', methods=['GET', 'POST'])
@@ -30,14 +39,28 @@ def login():
         session['logged_in'] = False
         return render_template("login.html")
     if request.method == 'POST':
-        correctpass = database.userpass(request.form['uname'])
-        if correctpass == request.form['psw']:
-            session['logged_in'] = True
-            session['user'] = database.fullname_fromuser(request.form['uname'])
-            return home()
-        else:
-            flash('wrong username/password')
-            return redirect(url_for('login'))
+        if request.form['account'] == 'customer':
+            correctpass = database.userpass(request.form['uname'])
+            if correctpass == request.form['psw']:
+                session['logged_in'] = True
+                session['user'] = database.fullname_fromuser(request.form['uname'])
+                session['uname'] = request.form['uname']
+                return home()
+            else:
+                flash('wrong username/password')
+
+        elif request.form['account'] == 'employee':
+            correctpass = database.userpassemployee(request.form['uname'])
+            if correctpass == request.form['psw']:
+                session['logged_in'] = True
+                session['employee'] = True
+                session['user'] = database.fullname_fromuseremployee(request.form['uname'])
+                session['uname'] = request.form['uname']
+                return home()
+            else:
+                flash('wrong username/password')
+
+    return redirect(url_for('login'))
 
 
 @app.route("/regform.html", methods=['GET', 'POST'])
@@ -53,7 +76,13 @@ def register():
 
 @app.route("/landpage.html")
 def landpage():
-    return render_template("landpage.html", fullname=session['user'])
+    userid = database.id_fromuser(session['uname'])
+    orders = database.past_orders(userid)
+    orderlist = []
+    for x in orders:
+        orderlist.append(x)
+
+    return render_template("landpage.html", fullname=session['user'], orders=orderlist)
 
 
 @app.route("/order.html", methods=['GET', 'POST'])
