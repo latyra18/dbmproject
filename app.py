@@ -30,7 +30,16 @@ def employee():
     start = database.startdate_employee(session['user'])
     position = database.position_employee(session['user'])
     wage = database.wage_employee(session['user'])
-    return render_template("employee.html", user=session['user'], start=start, position=position, wage=wage)
+    user_id = database.id_fromemployee(session['uname'])
+    userschedule = database.userschedule(user_id)
+    return render_template("employee.html", user=session['user'], start=start, position=position, wage=wage,
+                           userschedule=userschedule)
+
+
+@app.route('/schedule.html')
+def schedule():
+    currentschedule = database.schedule()
+    return render_template("schedule.html", schedule=currentschedule)
 
 
 @app.route('/login.html', methods=['GET', 'POST'])
@@ -71,7 +80,7 @@ def register():
         # add user to db
         database.new_user(request.form['fname'], request.form['lname'], request.form['uname'],
                           request.form['psw'], request.form['pn'])
-        return render_template("landpage.html")
+        return render_template("login.html")
 
 
 @app.route("/landpage.html")
@@ -89,6 +98,10 @@ def landpage():
 def order():
     if request.method == 'GET':
         return render_template("order.html")
+    if request.method == 'POST':
+        orderitems = request.args.getlist('items')
+
+        return render_template("cart.html", order=orderitems)
 
 
 @app.route("/menu.html")
@@ -102,8 +115,21 @@ def location():
 
 
 @app.route("/profile.html")
-def logout():
-    return render_template("profile.html", user=session['user'])
+def profile_business():
+    userid = database.id_fromuser(session['uname'])
+    # 4
+    sum_order = database.sum_past_orders(userid)
+    # 8
+    locrev = database.locations_revenues()
+    # 9
+    mostorders = database.most_locations_diner()
+
+    # 10
+    answerlist = database.user_twentytwo_total_orders()
+    return render_template("profile.html", user=session['user'], ordersTotal=sum_order,
+                           locations=locrev,
+                           location=mostorders,
+                           user_twentytwo=answerlist[0], times_user=answerlist[1])
 
 
 if __name__ == '__main__':

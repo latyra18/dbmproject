@@ -81,6 +81,7 @@ body {
   <a class="active" href="landpage.html">Home</a>
   <a href="menu.html">Menu</a>
   <a href="order.html">Order</a>
+    <a href="cart.html">Cart</a>
   <a href="location.html">Locations</a>
   <a href="profile.html">My Profile</a>
   <a href="login.html">Logout</a>
@@ -91,6 +92,55 @@ body {
 </div>
      <br>  <br>
       <p>{{user}}'s Account</p>
+<div class="acen"><h2>Business Questions</h2>
+    <br>
+    <h4>1. How many times has {{user}} visited The MSC?<br>
+        {{timesMSC}}
+    </h4>
+
+    <h4>2. How many times has {{user}} visited The Zone?<br>
+        {{timesZone}}
+    </h4>
+
+    <h4>3. How many times has {{user}} visited The Nursing campus?<br>
+        {{timesNursing}}
+    </h4>
+
+    <h4>4. How many times has {{user}} ordered through the system?<br>
+        {{ordersTotal}}
+    </h4>
+
+    <h4>5. How many times has {{user}} ordered Fish?<br>
+        {{timesFish}}
+    </h4>
+
+    <h4>6. How many times has Fish been ordered in total?<br>
+        {{totalFish}}
+    </h4>
+
+    <h4>7. How many times has {{user}} ordered during the lunch shift?<br>
+        {{timesLunch}}
+    </h4>
+
+    <h4>8. What are the locations and their total revenues?<br>
+         {% for x in locations %}
+        <li>{{x[0]}} with ${{x[1]}}</li>
+
+        {% endfor %}
+    </h4>
+
+    <h4>9. Which location had the most orders during the dinner shift?<br>
+        {{location[0]}} with {{location[1]}} orders
+    </h4>
+
+    <h4>10. Who was the 22nd user and how many times have they ordered?<br>
+        {{user_twentytwo}} has ordered {{times_user}} times
+    </h4>
+
+
+
+
+</div>
 </body>
 </html>
 

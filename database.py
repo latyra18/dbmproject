@@ -39,11 +39,19 @@ ResultSet = ReseltHandle.fetchall()
 
 # get user id
 def id_fromuser(username_given):
-    query = db.select([Users.idUser]).where(Users.username == username_given)
-    resulthandler = engine.execute(query)
-    resultset = resulthandler.first()
-    userid = resultset[0]
-    return userid
+    query = text("select users.idUser from users where username = :user")
+    rs = conn.execute(query, user=username_given).first()
+    return rs
+
+
+# get employee id
+def id_fromemployee(username_given):
+    query = text("select employee.idemployee from employee where username = :user")
+    rs = conn.execute(query, user=username_given).first()
+    return rs[0]
+
+
+print(id_fromemployee("Sal Kuhl"))
 
 
 # Username and Password search
@@ -56,7 +64,9 @@ def userpass(username):
     else:
         return
 
-print(userpass('spaty4'))
+
+print(userpass('tuser20'))
+
 
 def userpassemployee(username):
     query = text("select employee.password from employee where username = :user")
@@ -67,6 +77,31 @@ def userpassemployee(username):
     else:
         return
 
+
+# Current employee Schedule for next 2 weeks
+def userschedule(username):
+    query = text("select  date, location.address, shifts.shiftType from schedule "
+                 "join shifts on shifts.idShift = schedule.idShift "
+                 "join location on location.idlocation= schedule.idlocation "
+                 "join employee on employee.idemployee = schedule.idemployee "
+                 "where employee.idemployee = :user and schedule.date >= curdate() "
+                 "and schedule.date < curdate()+14 order by date;")
+    rs = conn.execute(query, user=username)
+    return rs
+
+
+# All employee schedules for next 2 weeks
+def schedule():
+    query = text("select employee.fullname, date, location.address, shifts.shiftType from schedule "
+                 "join shifts on shifts.idShift = schedule.idShift "
+                 "join location on location.idlocation= schedule.idlocation "
+                 "join employee on employee.idemployee = schedule.idemployee "
+                 "where schedule.date >= curdate() "
+                 "and schedule.date < curdate()+14 order by date;")
+    rs = conn.execute(query)
+    return rs
+
+
 # Employee start date
 def startdate_employee(name):
     query = text("select employee.startDate from employee where username = :user")
@@ -74,12 +109,14 @@ def startdate_employee(name):
     date = rs[0]
     return date
 
+
 # Position of employee
 def position_employee(name):
     query = text("select employee.title from employee where username = :user")
     rs = conn.execute(query, user=name).first()
     position = rs[0]
     return position
+
 
 # Wage of employee
 def wage_employee(name):
@@ -109,7 +146,7 @@ def fullname_fromuseremployee(username_given):
 def past_orders(iduser):
     query = text("select orders.idOrder, orders.time, orders.idLocation, orders.total "
                  "from orders join fooditems ON orders.idOrder = fooditems.idOrder "
-                 "join menu on fooditems.idItem = menu.idItem where orders.idUser = :user group by idOrder")
+                 "join menu on fooditems.idItem = menu.idItem where orders.idUser = :user group by idOrder;")
     rs = conn.execute(query, user=iduser).fetchall()
     return rs
 
@@ -122,5 +159,40 @@ def new_user(firstname, lastname, username, password, phonenumber):
     trans = conn.begin()
     conn.execute(query, first=firstname, last=lastname, user=username, psw=password, phone=phonenumber)
     trans.commit()
-    conn.close()
     return
+
+
+# Business Questions
+# 4
+def sum_past_orders(iduser):
+    orders = past_orders(iduser)
+    return len(orders)
+
+
+# 10
+def user_twentytwo_total_orders():
+    query = text("select fullName, COUNT(o.idUser) as count from orders o "
+                 "join users on users.idUser = o.idUser where users.idUser = 22;")
+    rs = conn.execute(query).first()
+    return rs
+
+
+# 9
+def most_locations_diner():
+    query = text(
+        "select l.address, Max(o.idlocation) as location from location l join orders o on l.idlocation = o.idLocation"
+        " where CAST(o.time as time ) >= '16:00:00' and CAST(o.time as time ) <= '21:00:00';")
+    rs = conn.execute(query).first()
+    return rs
+
+
+# 8
+def locations_revenues():
+    query = text("Select l.address, sum(total) "
+                 "from orders o join location l on l.idlocation = o.idLocation "
+                 "group by address;")
+    rs = conn.execute(query)
+    return rs
+
+# 1
+# def working_lastwk_nov():

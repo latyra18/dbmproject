@@ -51,6 +51,7 @@ body {
 <div class="topnav">
   <a href="menu.html">Menu</a>
   <a href="order.html">Order</a>
+    <a href="cart.html">Cart</a>
   <a href="location.html">Locations</a>
   <a href="profile.html">My Profile</a>
   <a href="login.html">Logout</a>
@@ -65,9 +66,12 @@ body {
   <h2>Welcome {{fullname}},  <br> Schedule your orders for pickup or delivery!</h2>
 </div>
 <div class="acen">
-  <h3>Show {{fullname}}'s orders here  <br> Orders... <br>
-   {% for order in orders %}
-        <li>{{orders[0]}}</li>
+  <h3> <br>
+        {{fullname}}'s past orders:
+      <br>
+   {% for x in orders %}
+        <li>Order number: {{x[0]}} {{x[1]}} {{x[2]}} ${{x[3]}}</li>
+
         {% endfor %}
   </h3>
 </div>
