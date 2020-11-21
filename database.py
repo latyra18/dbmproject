@@ -92,12 +92,7 @@ def userschedule(username):
 
 # All employee schedules for next 2 weeks
 def schedule():
-    query = text("select employee.fullname, date, location.address, shifts.shiftType from schedule "
-                 "join shifts on shifts.idShift = schedule.idShift "
-                 "join location on location.idlocation= schedule.idlocation "
-                 "join employee on employee.idemployee = schedule.idemployee "
-                 "where schedule.date >= curdate() "
-                 "and schedule.date < curdate()+14 order by date;")
+    query = text("select * from twoweek_schedule")
     rs = conn.execute(query)
     return rs
 
