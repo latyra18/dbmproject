@@ -94,8 +94,12 @@ body {
       <p>{{user}}'s Account</p>
 <div class="acen"><h2>Business Questions</h2>
     <br>
-    <h4>1. How many times has {{user}} visited The MSC?<br>
-        {{timesMSC}}
+    <h4>1. Show all employees working the last week of November?<br>
+        <ul>
+            {% for x in nov %}
+                <li>{{x[0]}} {{x[1]}} {{x[2]}} {{x[3]}}</li>
+             {% endfor %}
+    </ul>
     </h4>
 
     <h4>2. How many times has {{user}} visited The Zone?<br>

@@ -2,36 +2,42 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script>src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"</script>
+
     <script>
-     /*var clicks = 0;
-    function myFunction() {
 
-        clicks += 1;
-        document.getElementById("demo").innerHTML = clicks;
-    }*/
+         items = [];
+         var x = 1;
+         function add_element_to_array(menuItem) {
+             items.push({key: x, value: menuItem})
+             alert("Item: " + document.getElementById(menuItem).name + " added to cart ");
+             x++;
+         }
 
-     items = [];
-     x = 0;
+         $.ajax({
+            type: "POST",
+            url: "/order.html",
+            contentType: "application/json",
+            data: JSON.stringify({items}),
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
 
-     function add_element_to_array(menuItem){
-            items.push(menuItem)
-                //document.getElementById("text1").value;
-            alert("Item: " + document.getElementById(menuItem).name + " added to cart ");
-            x++;
-            //document.getElementById("text1").value = "";
-        }
-     /*('1').observe('click', add_element_to_array(1));
-     ('2').observe('click', add_element_to_array(2));
-     ('3').observe('click', add_element_to_array(3));
-     ('4').observe('click', add_element_to_array(4));
-     ('5').observe('click', add_element_to_array(5));
-     ('6').observe('click', add_element_to_array(6));
-     ('7').observe('click', add_element_to_array(7));
-     ('8').observe('click', add_element_to_array(8));
-     ('9').observe('click', add_element_to_array(9));
-     ('10').observe('click', add_element_to_array(10));
-     ('11').observe('click', add_element_to_array(11));
-     ('12').observe('click', add_element_to_array(12));*/
+            /*$("#submit").on("click", function () {
+                $.ajax({
+                    url: '/order.html',//give your url here
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(items),
+                    dataType: 'json'
+                });
+            });*/
 
 
 
@@ -147,7 +153,7 @@ body {
   <p class="price">$9.26</p>
   <p>TWO GOLDEN FRIED FISH FILLETS SERVED WITH FRIES</p>
     <!--<a> <p><button id="1">Add to cart</button></p></a>-->
-    <input id="1" type="button" name="Fried Fish" value="Add to Cart" onclick="add_element_to_array(1);" />
+    <input id="1" type="submit" name="Fried Fish" value="Add to Cart" onclick="add_element_to_array(1);" />
 
 </div>
 <br>

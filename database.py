@@ -41,7 +41,7 @@ ResultSet = ReseltHandle.fetchall()
 def id_fromuser(username_given):
     query = text("select users.idUser from users where username = :user")
     rs = conn.execute(query, user=username_given).first()
-    return rs
+    return rs[0]
 
 
 # get employee id
@@ -49,9 +49,6 @@ def id_fromemployee(username_given):
     query = text("select employee.idemployee from employee where username = :user")
     rs = conn.execute(query, user=username_given).first()
     return rs[0]
-
-
-print(id_fromemployee("Sal Kuhl"))
 
 
 # Username and Password search
@@ -190,4 +187,10 @@ def locations_revenues():
     return rs
 
 # 1
-# def working_lastwk_nov():
+def working_lastwk_nov():
+    query = text("select employee.fullname, location.address, shifts.shiftType, date from schedule s "
+                 "join shifts on shifts.idShift = s.idShift  join location on location.idlocation = s.idlocation "
+                 "join employee on employee.idemployee = s.idemployee "
+                 "where date >= '2020-11-23' and date <= '2020-11-30' order by date;")
+    rs = conn.execute(query)
+    return rs

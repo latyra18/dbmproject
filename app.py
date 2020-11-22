@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, session, flash, redirect, url_for
+from flask import Flask, render_template, request, session, flash, redirect, url_for, json
 import secrets
 import database
 
@@ -86,9 +86,9 @@ def register():
 @app.route("/landpage.html")
 def landpage():
     userid = database.id_fromuser(session['uname'])
-    orders = database.past_orders(userid)
+    order_list = database.past_orders(userid)
     orderlist = []
-    for x in orders:
+    for x in order_list:
         orderlist.append(x)
 
     return render_template("landpage.html", fullname=session['user'], orders=orderlist)
@@ -99,8 +99,7 @@ def order():
     if request.method == 'GET':
         return render_template("order.html")
     if request.method == 'POST':
-        orderitems = request.args.getlist('items')
-
+        orderitems = request.get_json()
         return render_template("cart.html", order=orderitems)
 
 
@@ -117,16 +116,27 @@ def location():
 @app.route("/profile.html")
 def profile_business():
     userid = database.id_fromuser(session['uname'])
+    # 1
+    working_lastwk_nov = database.working_lastwk_nov()
+    # 2
+
+    # 3
+
     # 4
     sum_order = database.sum_past_orders(userid)
+    # 5
+
+    # 6
+
+    # 7
+
     # 8
     locrev = database.locations_revenues()
     # 9
     mostorders = database.most_locations_diner()
-
     # 10
     answerlist = database.user_twentytwo_total_orders()
-    return render_template("profile.html", user=session['user'], ordersTotal=sum_order,
+    return render_template("profile.html", user=session['user'], nov=working_lastwk_nov, ordersTotal=sum_order,
                            locations=locrev,
                            location=mostorders,
                            user_twentytwo=answerlist[0], times_user=answerlist[1])
