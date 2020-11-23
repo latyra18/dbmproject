@@ -94,13 +94,59 @@ def landpage():
     return render_template("landpage.html", fullname=session['user'], orders=orderlist)
 
 
-@app.route("/order.html", methods=['GET', 'POST'])
+@app.route("/order_two.html", methods=['GET', 'POST'])
 def order():
     if request.method == 'GET':
-        return render_template("order.html")
+        return render_template("order_two.html")
     if request.method == 'POST':
-        orderitems = request.get_json()
-        return render_template("cart.html", order=orderitems)
+
+        one = int(request.form['first'])
+        two = int(request.form['second'])
+        three = int(request.form['third'])
+        four = int(request.form['fourth'])
+        five = int(request.form['fifth'])
+        orderlist = []
+        checkoutfinal = []
+        pricelist = []
+        totalprice = 0
+        if one > 0:
+            orderlist.append(one)
+        if two > 0:
+            orderlist.append(two)
+        if three > 0:
+            orderlist.append(three)
+        if four > 0:
+            orderlist.append(four)
+        if five > 0:
+            orderlist.append(five)
+
+        for x in orderlist:
+            checkoutfinal.append(database.menu_item(x))
+
+        for x in orderlist:
+            pricelist.append(float(database.menu_item_price(x)))
+
+        for ele in range(0, len(pricelist)):
+            totalprice = totalprice + pricelist[ele]
+
+        session['order'] = orderlist
+        session['location'] = request.form['location']
+        session['price'] = totalprice
+        locationorder = database.location_byid(session['location'])
+
+        return render_template("cart.html", checkout=checkoutfinal, location=locationorder, total=totalprice)
+
+
+@app.route("/cart.html", methods=['GET', 'POST'])
+def checkout():
+    if request.method == 'POST':
+        userid = database.id_fromuser(session['uname'])
+        database.new_order(session.get('location', None), userid, session.get('price'))
+        idorder = database.orderid_lastinsert(userid)
+        for x in session.get("order"):
+            database.insert_fooditems(idorder, x)
+        return render_template("/ordercomplete.html", ordernumber=idorder)
+
 
 
 @app.route("/menu.html")
@@ -119,24 +165,31 @@ def profile_business():
     # 1
     working_lastwk_nov = database.working_lastwk_nov()
     # 2
-
+    usermsc_orders = database.user_orders_msc(userid)
     # 3
-
+    most_lunchorders = database.most_locations_lunch()
     # 4
     sum_order = database.sum_past_orders(userid)
     # 5
-
+    userzone_orders = database.user_orders_zone()
     # 6
-
+    fish_orders = database.zone_fishorders()
     # 7
-
+    max_breakfast = database.most_locations_breakfast()
     # 8
     locrev = database.locations_revenues()
     # 9
     mostorders = database.most_locations_diner()
     # 10
     answerlist = database.user_twentytwo_total_orders()
-    return render_template("profile.html", user=session['user'], nov=working_lastwk_nov, ordersTotal=sum_order,
+    return render_template("profile.html", user=session['user'],
+                           nov=working_lastwk_nov,
+                           timesMSC=usermsc_orders,
+                           lunchlocation=most_lunchorders,
+                           ordersTotal=sum_order,
+                           customers=userzone_orders,
+                           totalFish=fish_orders,
+                           breakfastlocation=max_breakfast,
                            locations=locrev,
                            location=mostorders,
                            user_twentytwo=answerlist[0], times_user=answerlist[1])

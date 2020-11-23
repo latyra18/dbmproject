@@ -928,11 +928,11 @@ SELECT|sys.sys_config:null
     <table id="294" parent="7" name="shifts"/>
     <table id="295" parent="7" name="users"/>
     <view id="296" parent="7" name="twoweek_schedule">
-      <SourceTextLength>683</SourceTextLength>
+      <SourceTextLength>738</SourceTextLength>
       <Definer>root@localhost</Definer>
     </view>
     <routine id="297" parent="7" name="order_total">
-      <SourceTextLength>256</SourceTextLength>
+      <SourceTextLength>190</SourceTextLength>
       <Definer>root@localhost</Definer>
       <RoutineKind>procedure</RoutineKind>
     </routine>
@@ -1289,18 +1289,23 @@ SELECT|sys.sys_config:null
       <ColNames>idUser</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="368" parent="296" name="date">
+    <column id="368" parent="296" name="idemployee">
       <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="369" parent="296" name="date">
+      <Position>2</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="369" parent="296" name="address">
-      <Position>2</Position>
+    <column id="370" parent="296" name="address">
+      <Position>3</Position>
       <DataType>varchar(776)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="370" parent="296" name="shiftType">
-      <Position>3</Position>
+    <column id="371" parent="296" name="shiftType">
+      <Position>4</Position>
       <DataType>enum(&apos;breakfast&apos;, &apos;lunch&apos;, &apos;dinner&apos;, &apos;late&apos;)|0e</DataType>
       <NotNull>1</NotNull>
     </column>

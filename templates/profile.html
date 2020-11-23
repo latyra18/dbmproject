@@ -80,7 +80,7 @@ body {
 <div class="topnav">
   <a class="active" href="landpage.html">Home</a>
   <a href="menu.html">Menu</a>
-  <a href="order.html">Order</a>
+  <a href="order_two.html">Order</a>
     <a href="cart.html">Cart</a>
   <a href="location.html">Locations</a>
   <a href="profile.html">My Profile</a>
@@ -99,31 +99,34 @@ body {
             {% for x in nov %}
                 <li>{{x[0]}} {{x[1]}} {{x[2]}} {{x[3]}}</li>
              {% endfor %}
-    </ul>
+        </ul>
     </h4>
 
-    <h4>2. How many times has {{user}} visited The Zone?<br>
-        {{timesZone}}
+    <h4>2. How many times has {{user}} ordered from the MSC?<br>
+        {{user}} has ordered from the MSC {{timesMSC}} times.
     </h4>
 
-    <h4>3. How many times has {{user}} visited The Nursing campus?<br>
-        {{timesNursing}}
+    <h4>3. Which location has had the most orders during the lunch shift?<br>
+        {{lunchlocation[0]}} with {{lunchlocation[1]}} orders
     </h4>
 
     <h4>4. How many times has {{user}} ordered through the system?<br>
-        {{ordersTotal}}
+        {{ordersTotal}} time
     </h4>
 
-    <h4>5. How many times has {{user}} ordered Fish?<br>
-        {{timesFish}}
+    <h4>5. List the full names of the customers that have ordered from the zone.<br>
+        {% for x in customers %}
+        <li>{{x[0]}}</li>
+
+        {% endfor %}
     </h4>
 
-    <h4>6. How many times has Fish been ordered in total?<br>
-        {{totalFish}}
+    <h4>6. How many times has the fish been ordered at the Zone?<br>
+        There have been {{totalFish}} fish orders at the zone.
     </h4>
 
-    <h4>7. How many times has {{user}} ordered during the lunch shift?<br>
-        {{timesLunch}}
+    <h4>7.  Which location had the most orders during the breakfast shift?<br>
+        {{breakfastlocation[0]}} with {{breakfastlocation[1]}} orders
     </h4>
 
     <h4>8. What are the locations and their total revenues?<br>

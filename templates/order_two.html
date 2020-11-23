@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pimage {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.acen {
+  text-align: center;
+  border: 3px solid #663399;
+
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #663399;
+  color: white;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}</style>
+</head>
+<body>
+<div class="topnav">
+  <a class="active" href="landpage.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="order_two.html">Order</a>
+  <a href="location.html">Locations</a>
+  <a href="profile.html">My Profile</a>
+  <a href="login.html">Logout</a>
+</div>
+
+<div class="pimage">
+    <img src="../static/pgrill.png" alt="centered image" />
+</div>
+
+
+<div class="acen">
+    <h2>Order Below </h2>
+    <form action="/order_two.html" method="POST">
+        <label for="location">Choose location:</label>
+            <select id="location" name="location">
+              <option value="1">MSC</option>
+              <option value="2">Zone</option>
+              <option value="3">Nursing Campus</option>
+
+            </select>
+        <label for="first">Choose item:</label>
+            <select id="first" name="first">
+              <option value="0">Empty</option>
+              <option value="1">Fish</option>
+              <option value="2">Shrimp</option>
+              <option value="3">Beyond Burger</option>
+              <option value="4">Loaded Baked Potato</option>
+              <option value="5">Baked Potato</option>
+              <option value="6">Chicken Wings</option>
+              <option value="7">Shrimp Po boy</option>
+              <option value="8">Fish sandwich</option>
+              <option value="9">Onion rings</option>
+              <option value="10">Fries</option>
+              <option value="11">Cookies</option>
+              <option value="12">Drink</option>
+            </select>
+
+        <label for="second">Choose item:</label>
+            <select id="second" name="second">
+              <option value="0">Empty</option>
+              <option value="1">Fish</option>
+              <option value="2">Shrimp</option>
+              <option value="3">Beyond Burger</option>
+              <option value="4">Loaded Baked Potato</option>
+              <option value="5">Baked Potato</option>
+              <option value="6">Chicken Wings</option>
+              <option value="7">Shrimp Poboy</option>
+              <option value="8">Fish sandwich</option>
+              <option value="9">Onion rings</option>
+              <option value="10">Fries</option>
+              <option value="11">Cookies</option>
+              <option value="12">Drink</option>
+            </select>
+
+        <label for="third">Choose item:</label>
+            <select id="third" name="third">
+              <option value="0">Empty</option>
+              <option value="1">Fish</option>
+              <option value="2">Shrimp</option>
+              <option value="3">Beyond Burger</option>
+              <option value="4">Loaded Baked Potato</option>
+              <option value="5">Baked Potato</option>
+              <option value="6">Chicken Wings</option>
+              <option value="7">Shrimp Poboy</option>
+              <option value="8">Fish sandwich</option>
+              <option value="9">Onion rings</option>
+              <option value="10">Fries</option>
+              <option value="11">Cookies</option>
+              <option value="12">Drink</option>
+            </select>
+
+        <label for="fourth">Choose item:</label>
+            <select id="fourth" name="fourth">
+              <option value="0">Empty</option>
+              <option value="1">Fish</option>
+              <option value="2">Shrimp</option>
+              <option value="3">Beyond Burger</option>
+              <option value="4">Loaded Baked Potato</option>
+              <option value="5">Baked Potato</option>
+              <option value="6">Chicken Wings</option>
+              <option value="7">Shrimp Poboy</option>
+              <option value="8">Fish sandwich</option>
+              <option value="9">Onion rings</option>
+              <option value="10">Fries</option>
+              <option value="11">Cookies</option>
+              <option value="12">Drink</option>
+            </select>
+
+        <label for="fifth">Choose item:</label>
+            <select id="fifth" name="fifth">
+              <option value="0">Empty</option>
+              <option value="1">Fish</option>
+              <option value="2">Shrimp</option>
+              <option value="3">Beyond Burger</option>
+              <option value="4">Loaded Baked Potato</option>
+              <option value="5">Baked Potato</option>
+              <option value="6">Chicken Wings</option>
+              <option value="7">Shrimp Poboy</option>
+              <option value="8">Fish sandwich</option>
+              <option value="9">Onion rings</option>
+              <option value="10">Fries</option>
+              <option value="11">Cookies</option>
+              <option value="12">Drink</option>
+            </select><br><br>
+
+
+         <button type="submit" class="subbtn"> Order Now</button>
+    </form>
+</div>
+</body>
+</html>
