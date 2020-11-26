@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pimage {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.acen {
+  text-align: center;
+  border: 3px solid #663399;
+
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #663399;
+  color: white;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="landpage.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="order_two.html">Order</a>
+  <a href="location.html">Locations</a>
+  <a href="profile.html">My Profile</a>
+  <a href="login.html">Logout</a>
+</div>
+
+<div class="acen">
+    <h2>My Profile</h2>
+</div>
+     <br>  <br>
+      <p>{{user}}'s Account</p>
+<div class="acen"><h2>Business Questions</h2>
+    <br>
+    <h4>1. Show all employees working the last week of November?<br>
+        <ul>
+            {% for x in nov %}
+                <li>{{x[0]}} {{x[1]}} {{x[2]}} {{x[3]}}</li>
+             {% endfor %}
+        </ul>
+    </h4>
+
+    <h4>2. How many times has {{user}} ordered from the MSC?<br>
+        {{user}} has ordered from the MSC {{timesMSC}} times.
+    </h4>
+
+    <h4>3. Which location has had the most orders during the lunch shift?<br>
+        {{lunchlocation[0]}} with {{lunchlocation[1]}} orders
+    </h4>
+
+    <h4>4. How many times has {{user}} ordered through the system?<br>
+        {{ordersTotal}} time
+    </h4>
+
+    <h4>5. List the full names of the customers that have ordered from the zone.<br>
+        {% for x in customers %}
+        <li>{{x[0]}}</li>
+
+        {% endfor %}
+    </h4>
+
+    <h4>6. How many times has the fish been ordered at the Zone?<br>
+        There have been {{totalFish}} fish orders at the zone.
+    </h4>
+
+    <h4>7.  Which location had the most orders during the breakfast shift?<br>
+        {{breakfastlocation[0]}} with {{breakfastlocation[1]}} orders
+    </h4>
+
+    <h4>8. What are the locations and their total revenues?<br>
+         {% for x in locations %}
+        <li>{{x[0]}} with ${{x[1]}}</li>
+
+        {% endfor %}
+    </h4>
+
+    <h4>9. Which location had the most orders during the dinner shift?<br>
+        {{location[0]}} with {{location[1]}} orders
+    </h4>
+
+    <h4>10. Who was the 22nd user and how many times have they ordered?<br>
+        {{user_twentytwo}} has ordered {{times_user}} times
+    </h4>
+
+
+
+
+</div>
+</body>
+</html>
+
+
