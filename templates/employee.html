@@ -86,11 +86,17 @@ body {
 <div class="acen">
     <h2>Employee Corner</h2>
 </div>
+
+<div class="pimage">
+    <img src="../static/pgrill.png" alt="centered image" />
+</div>
+
 <div class="=acen">
     <p>Employee: {{user}} <br> Since: {{start}}<br> Position: {{position}}<br> Hourly wage: {{wage}}</p>
     <h4>Your schedule for <script> document.write(new Date().toLocaleDateString());</script>
         to <script> document.write(new Date(Date.now() + 12096e5).toLocaleDateString()); </script></h4>
-    <br>
+    </div><br>
+    <div>
     <ul>
     {% for x in userschedule %}
         <li>{{x[0]}} {{x[1]}} {{x[2]}}</li>
