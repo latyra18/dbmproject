@@ -9,3 +9,9 @@ Database dump located inside database dump folder and should be named dump.sql
 command- prompt for password
     mysql -u <username> -p <databasename> < dump.sql
     databasename: panthergrill
+    username: root
+    password: april2000
+                                                    
+                                                    
+                                                    
+                    
